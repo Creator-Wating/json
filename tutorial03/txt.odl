@@ -1,0 +1,58 @@
+interface Supplier(key company-code)
+{
+    attribute string year-of-establishment;
+    attribute string company-code;
+    relationship Set<Linkage-company> Linkage
+        inverse Linkage-company::Been-Linkag;
+    relationship Set<Manufacturer> subordinate
+        inverse Manufacturer::subordinated;
+}
+interface Linkage-company(key enterprise code)
+{
+    attribute string year-of-establishment;
+    attribute string company-code;
+    relationship Set<Supplier> Been-Linkag
+        inverse Supplier ::Linkage
+}
+interface Manufacturer(key order,Supplier-code)
+{
+    attribute string geographical-location;
+    attribute int order;
+    attribute longint scale;
+    attribute Supplier-code;
+    relationship Supplier subordinated
+       inverse Supplier::subordinate;
+    relationship Set<Commodity> produced
+        inverse Commodity::produce;
+    relationship Set<Retailer> agent
+        inverse Retailer::avenged;
+}
+interface Commodity(key production-number)
+{
+    attribute string production-number;
+    attribute string specification;
+    attribute string production-date;
+    relationship Manufacturer produce
+        inverse Manufacturer::produced;
+    relationship Set<Retailer> sale
+        inverse Retailer::saled;
+}
+interface Retailer(key business-license-number)
+{
+    attribute string name;
+    attribute string geographical-location;
+    attribute string business-license-number;
+    relationship Set<Commodity> saled
+        inverse Commodity::sale;
+    relationship Set<Manufacturer> avenged
+        inverse Manufacturer::agent;
+}
+
+
+Supplier(year-of-establishment,company-code,Linkage-code)
+Linkage-company(year-of-establishment,company-code)
+Manufacturer(geographical-location,order,scale,Supplier-code,business-license-number)
+Commodity(production-number,specification,production-date,order,Supplier-code,business-license-number)
+Retailer(name,geographical-location,business-license-number)
+
+
