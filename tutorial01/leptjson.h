@@ -1,4 +1,4 @@
-#ifndef LEPTJSON_H__
+t #ifndef LEPTJSON_H__
 #define LEPTJSON_H__
 //可以使用 项目名_目录_文件名称_H__ 的形式
 typedef enum { LEPT_NULL, LEPT_FALSE, LEPT_TRUE, LEPT_NUMBER, 
